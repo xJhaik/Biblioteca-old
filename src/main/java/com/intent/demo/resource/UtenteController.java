@@ -31,15 +31,24 @@ public class UtenteController {
     }
 
     @PostMapping(value = "/utente")
-    public String addUtente (@RequestBody UtenteModel utente) {
-        //TODO controllo username email
-        try {
-            utenteRepository.save(utente);
-            return utente.toString() + " Aggiunto correttamente.";
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return " Errore: Impossibile aggiungere l'utente. Controllare i parametri inseriti";
+    public String addUtente (@RequestBody UtenteModel utenteDaLoggare) {
+        for (UtenteModel utente : utenteRepository.findAll()) {
+            if (!utente.getUsername().equals(utenteDaLoggare.getUsername()) &&
+                    !utente.getEmail().equals(utenteDaLoggare.getEmail())){
+                try {
+                    utenteRepository.save(utenteDaLoggare);
+                    return utenteDaLoggare.toString() + " Iscrizione eseguita.";
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    return " Errore: Impossibile iscriversi. Controllare i parametri inseriti";
+                }
+            } else if(utente.getUsername().equals(utenteDaLoggare.getUsername())) {
+                return " Username già esistente.";
+            } else if(utente.getEmail().equals(utenteDaLoggare.getEmail())){
+                return " Email già utilizzata";
+            }
         }
+        return null;
     }
 
     @PutMapping(value = "/utente/{id}")

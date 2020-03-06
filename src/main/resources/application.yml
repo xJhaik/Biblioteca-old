@@ -8,4 +8,3 @@ spring:
     hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: true
-    dialect:
