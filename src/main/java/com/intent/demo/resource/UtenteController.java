@@ -33,8 +33,8 @@ public class UtenteController {
     @PostMapping(value = "/utente")
     public String addUtente (@RequestBody UtenteModel utenteDaLoggare) {
         for (UtenteModel utente : utenteRepository.findAll()) {
-            if (!utente.getUsername().equals(utenteDaLoggare.getUsername()) &&
-                    !utente.getEmail().equals(utenteDaLoggare.getEmail())){
+            if (!utenteDaLoggare.getUsername().equals(utente.getUsername()) &&
+                    !utenteDaLoggare.getEmail().equals(utente.getEmail())){
                 try {
                     utenteRepository.save(utenteDaLoggare);
                     return utenteDaLoggare.toString() + " Iscrizione eseguita.";
@@ -48,7 +48,7 @@ public class UtenteController {
                 return " Email già utilizzata";
             }
         }
-        return null;
+        return " Non sono entrato in nessun if.";
     }
 
     @PutMapping(value = "/utente/{id}")
