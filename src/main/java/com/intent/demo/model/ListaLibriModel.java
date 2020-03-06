@@ -20,7 +20,7 @@ public class ListaLibriModel {
     private Integer id;
 
     @Getter @Setter
-    @Column(name = "titolo")
+    @Column(name = "titolo", nullable = false, unique = true)
     private String titolo;
 
     @Getter @Setter

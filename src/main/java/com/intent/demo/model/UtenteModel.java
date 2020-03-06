@@ -26,15 +26,15 @@ public class UtenteModel {
     @Getter @Setter
     private String cognome;
 
-    @Column(name="username")
+    @Column(name="username", nullable = false, unique = true)
     @Getter @Setter
     private String username;
 
-    @Column(name="password")
+    @Column(name="password",  nullable = false)
     @Getter @Setter
     private String password;
 
-    @Column(name="email")
+    @Column(name="email", nullable = false, unique = true)
     @Getter @Setter
     private String email;
 
