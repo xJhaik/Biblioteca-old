@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController("/lista-libri")
+@CrossOrigin(origins = "*")
 public class ListaLibriController {
 
     @Autowired
