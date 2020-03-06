@@ -32,20 +32,25 @@ public class UtenteController {
 
     @PostMapping(value = "/utente")
     public String addUtente (@RequestBody UtenteModel utenteDaLoggare) {
-        for (UtenteModel utente : utenteRepository.findAll()) {
-            if (!utenteDaLoggare.getUsername().equals(utente.getUsername()) &&
-                    !utenteDaLoggare.getEmail().equals(utente.getEmail())){
-                try {
-                    utenteRepository.save(utenteDaLoggare);
-                    return utenteDaLoggare.toString() + " Iscrizione eseguita.";
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    return " Errore: Impossibile iscriversi. Controllare i parametri inseriti";
+        boolean esistente = false;
+        while (!esistente) {
+            for (UtenteModel utente : utenteRepository.findAll()) {
+                if (utenteDaLoggare.getUsername().equals(utente.getUsername())) {
+                    esistente = true;
+                    return " Username già utilizzato.";
+                } else if (utente.getEmail().equals(utenteDaLoggare.getEmail())) {
+                    esistente = true;
+                    return " Email già utilizzata";
+                } else {
+                    try {
+                        utenteRepository.save(utenteDaLoggare);
+                        return utenteDaLoggare.toString() + " Iscrizione eseguita.";
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        return " Errore: Impossibile iscriversi. Controllare i parametri inseriti";
+                    }
                 }
-            } else if(utente.getUsername().equals(utenteDaLoggare.getUsername())) {
-                return " Username già esistente.";
-            } else if(utente.getEmail().equals(utenteDaLoggare.getEmail())){
-                return " Email già utilizzata";
+
             }
         }
         return " Non sono entrato in nessun if.";
