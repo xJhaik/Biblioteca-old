@@ -27,8 +27,8 @@ public class ListaLibriController {
     }
 
     @GetMapping("/lista-libri/{id}")
-    public Optional<ListaLibriModel> getListaById (@PathVariable int id){
-        return listaLibriRepository.findById(id);
+    public ListaLibriModel getListaById (@PathVariable int id){
+        return listaLibriRepository.findById(id).get();
     }
 
     @PostMapping(value = "/lista-libri")

@@ -26,8 +26,8 @@ public class UtenteController {
     }
 
     @GetMapping("/utente/{id}")
-    public Optional<UtenteModel> getUtenteById (@PathVariable int id){
-        return utenteRepository.findById(id);
+    public UtenteModel getUtenteById (@PathVariable int id){
+        return utenteRepository.findById(id).get();
     }
 
     @PostMapping(value = "/utente")
