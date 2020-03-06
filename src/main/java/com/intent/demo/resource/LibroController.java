@@ -21,8 +21,8 @@ public class LibroController {
     }
 
     @GetMapping("/libro/{id}")
-    public Optional<LibroModel> getLibroById (@PathVariable int id){
-        return libroRepository.findById(id);
+    public LibroModel getLibroById (@PathVariable int id){
+        return libroRepository.findById(id).get();
     }
 
     @PostMapping(value = "/libro")
