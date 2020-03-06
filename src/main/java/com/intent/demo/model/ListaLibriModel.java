@@ -15,7 +15,7 @@ public class ListaLibriModel {
 
     @Id
     @Getter @Setter
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
     private Integer id;
 

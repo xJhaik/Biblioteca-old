@@ -16,7 +16,7 @@ public class LibroModel {
     @Id
     @Getter @Setter
     @Column(name = "id" , updatable = false, nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Getter @Setter

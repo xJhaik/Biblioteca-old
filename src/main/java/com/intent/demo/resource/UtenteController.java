@@ -32,6 +32,7 @@ public class UtenteController {
 
     @PostMapping(value = "/utente")
     public String addUtente (@RequestBody UtenteModel utente) {
+        //TODO controllo username email
         try {
             utenteRepository.save(utente);
             return utente.toString() + " Aggiunto correttamente.";
