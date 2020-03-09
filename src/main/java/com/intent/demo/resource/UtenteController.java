@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController("/utente")
 @CrossOrigin(origins = "*")
@@ -30,31 +31,25 @@ public class UtenteController {
         return utenteRepository.findById(id).get();
     }
 
-    @PostMapping(value = "/utente")
+    @PostMapping(value = "/signup")
     public String addUtente (@RequestBody UtenteModel utenteDaLoggare) {
-        boolean esistente = false;
-        while (!esistente) {
-            for (UtenteModel utente : utenteRepository.findAll()) {
-                if (utenteDaLoggare.getUsername().equals(utente.getUsername())) {
-                    esistente = true;
-                    return " Username già utilizzato.";
-                } else if (utente.getEmail().equals(utenteDaLoggare.getEmail())) {
-                    esistente = true;
-                    return " Email già utilizzata";
-                } else {
-                    try {
-                        utenteRepository.save(utenteDaLoggare);
-                        return utenteDaLoggare.toString() + " Iscrizione eseguita.";
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                        return " Errore: Impossibile iscriversi. Controllare i parametri inseriti";
-                    }
-                }
-
+        List<UtenteModel> lista = utenteRepository.findAll();
+        List<UtenteModel> esistente = lista.stream().filter(utenteModel -> (utenteDaLoggare.getUsername().equals(utenteModel.getUsername())) ||
+                utenteDaLoggare.getEmail().equals(utenteModel.getEmail())).collect(Collectors.toList());
+        if(esistente.isEmpty()) {
+            try {
+                utenteRepository.save(utenteDaLoggare);
+                return utenteDaLoggare.toString() + " Iscrizione eseguita.";
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                return " Errore: Impossibile iscriversi. Controllare i parametri inseriti";
             }
         }
-        return " Non sono entrato in nessun if.";
+        return " Utente già esistente";
     }
+
+    @PostMapping(value = "/login")
+
 
     @PutMapping(value = "/utente/{id}")
     public Optional<UtenteModel> editUtente (@RequestBody UtenteModel utente, @PathVariable int id){
