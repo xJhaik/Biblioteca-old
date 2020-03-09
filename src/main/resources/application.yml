@@ -1,20 +1,20 @@
-#spring:
-#  datasource:
-#    driverClassName: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://eu-cdbr-west-02.cleardb.net/heroku_a261051d9784028?useLegacyDatetimeCode=false&serverTimezone=UTC
-#    username: bb386f999f5b39
-#    password: 76454d35
-#  jpa:
-#    hibernate.ddl-auto: update
-#    generate-ddl: true
-#    show-sql: true
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/biblioteca?useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: root
-    password: root
+    url: jdbc:mysql://eu-cdbr-west-02.cleardb.net/heroku_a261051d9784028?useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: bb386f999f5b39
+    password: 76454d35
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: true
+#spring:
+#  datasource:
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/biblioteca?useLegacyDatetimeCode=false&serverTimezone=UTC
+#    username: root
+#    password: root
+#  jpa:
+#    hibernate.ddl-auto: update
+#    generate-ddl: true
+#    show-sql: true
