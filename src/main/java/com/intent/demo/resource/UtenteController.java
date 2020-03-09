@@ -33,7 +33,7 @@ public class UtenteController {
     @PostMapping(value = "/utente")
     public String addUtente (@RequestBody UtenteModel utenteDaLoggare) {
         boolean esistente = false;
-        while (!esistente) {
+        while (esistente) {
             for (UtenteModel utente : utenteRepository.findAll()) {
                 if (utenteDaLoggare.getUsername().equals(utente.getUsername())) {
                     esistente = true;
